@@ -25,3 +25,10 @@ with open(input_file, "r") as file:
     websites = [line.strip() for line in file if line.strip()]
 
 print(f"Checking {len(websites)} websites...")
+
+# Iterate over websites and check status
+for website in websites:
+    status_code, response_time, status = check_website(website)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"{website} - {status} - {status_code if status_code else 'N/A'}")
+    log_results([timestamp, website, response_time or "N/A", status_code or "N/A", status])
