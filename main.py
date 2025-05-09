@@ -32,3 +32,8 @@ for website in websites:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"{website} - {status} - {status_code if status_code else 'N/A'}")
     log_results([timestamp, website, response_time or "N/A", status_code or "N/A", status])
+
+# Initialize log file with headers
+with open("log.csv", mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Timestamp", "URL", "Response Time (ms)", "Status Code", "Status"])
