@@ -4,7 +4,6 @@ from datetime import datetime
 
 input_file = "websites.txt"
 
-
 def check_website(url):
     """Check the health of a website."""
     try:
@@ -13,6 +12,13 @@ def check_website(url):
         return response.status_code, response.elapsed.total_seconds() * 1000, status
     except requests.exceptions.RequestException:
         return None, None, "Offline"
+
+
+def log_results(data):
+    """Log results to a CSV file."""
+    with open("log.csv", mode="a", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(data)
 
 
 with open(input_file, "r") as file:
